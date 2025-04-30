@@ -1,0 +1,32 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'bugs/base.css' %}">
+<link rel="stylesheet" href="{% static 'bugs/bug_list.css' %}">
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bug Tracker</title>
+</head>
+<body>
+    <header>
+        <h1>Bug List</h1>
+        <nav>
+            <a href="{% url 'create_bug' %}">Report a Bug</a>
+        </nav>
+    </header>
+    <ul>
+        {% for bug in bugs %}
+            <li>
+                <strong>{{ bug.title }}</strong> ({{ bug.status }}) - Severity {{ bug.severity }}  
+                <br>
+                {{ bug.description }}
+                <br>
+                <small>Reported: {{ bug.created_at }}</small>
+            </li>
+        {% empty %}
+            <li>No bugs found.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
