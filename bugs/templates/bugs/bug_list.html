@@ -1,32 +1,19 @@
-{% load static %}
-<link rel="stylesheet" href="{% static 'bugs/base.css' %}">
-<link rel="stylesheet" href="{% static 'bugs/bug_list.css' %}">
+{% extends 'bugs/base.html' %}
+    {% block title %}Bug List{% endblock %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Bug Tracker</title>
-</head>
-<body>
-    <header>
-        <h1>Bug List</h1>
-        <nav>
-            <a href="{% url 'create_bug' %}">Report a Bug</a>
-        </nav>
-    </header>
-    <ul>
-        {% for bug in bugs %}
-            <li>
-                <strong>{{ bug.title }}</strong> ({{ bug.status }}) - Severity {{ bug.severity }}  
-                <br>
-                {{ bug.description }}
-                <br>
-                <small>Reported: {{ bug.created_at }}</small>
-            </li>
-        {% empty %}
-            <li>No bugs found.</li>
-        {% endfor %}
-    </ul>
-</body>
-</html>
+    {% block content %}
+        <h2>Current Bugs</h2>
+        <ul>
+            {% for bug in bugs %}
+                <li class="bug">
+                    <strong>{{ bug.title }}</strong> ({{ bug.status }}) - Severity {{ bug.severity }}<br>
+                    {{ bug.description }}<br>
+                    <small>Reported: {{ bug.created_at }}</small>
+                    <a href="{% url 'delete_bug' bug.id %}" onclick="return confirm('Are you sure you want to delete this bug?');"> 🗑 Delete</a>
+                </li>
+            {% empty %}
+                <li>No bugs found.</li>
+            {% endfor %}
+        </ul>
+        <p><a href="{% url 'create_bug' %}">Submit a new bug</a></p>
+    {% endblock %}

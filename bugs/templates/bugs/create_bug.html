@@ -1,21 +1,15 @@
-{% load static %}
-<link rel="stylesheet" href="{% static 'bugs/base.css' %}">
-<link rel="stylesheet" href="{% static 'bugs/create_bug.css' %}">
+{% extends 'bugs/base.html' %}
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Report a Bug</title>
-    </head>
-    <body>
-        <h1>Submit a New Bug</h1>
+{% block title %}Report a Bug{% endblock %}
 
-        <form method="POST">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Submit Bug</button>
-        </form>
+{% block content %}
+    <h2>Submit a New Bug</h2>
 
-        <p><a href="{% url 'bug_list' %}">Back to Bug List</a></p>
-    </body>
-</html>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+
+    <p><a href="{% url 'bug_list' %}">Back to bug list</a></p>
+{% endblock %}

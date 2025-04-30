@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}BugTracker{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'bugs/base.css' %}">
+    <link rel="stylesheet" href="{% static 'bugs/bug_list.css' %}">
+    <link rel="stylesheet" href="{% static 'bugs/create_bug.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>🐞 BugTracker</h1>
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
